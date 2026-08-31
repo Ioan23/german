@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servicii de amenajare grădini — garduri, gazon, rădăcini, gard viu</title>
+<meta name="description" content="Montaj gard, tuns gazon, scoatere rădăcini și cioate, tuns gard viu. Lucrări executate corect, cu utilaje profesionale și curățenie la final.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --padure:#17231C;
+  --muschi:#2E4E39;
+  --frunza:#4A7A56;
+  --piatra:#ECEEE9;
+  --alb:#FBFCFA;
+  --rumegus:#D9A02B;
+  --text:#25302A;
+  --gri:#66736B;
+  --linie:#D3D8D1;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--piatra);color:var(--text);
+  font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:700;line-height:1.08;margin:0}
+p{margin:0 0 1em}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{width:min(1120px,92vw);margin-inline:auto}
+
+/* ---------- bara de sus ---------- */
+header{
+  position:sticky;top:0;z-index:40;background:rgba(23,35,28,.94);
+  backdrop-filter:saturate(140%) blur(8px);color:#EDF1EC;
+}
+.bara{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0}
+.marca{font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em;text-decoration:none}
+.marca span{color:var(--rumegus)}
+nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0;font-size:15px}
+nav a{text-decoration:none;color:#C8D3C9;padding:4px 0;border-bottom:2px solid transparent}
+nav a:hover,nav a:focus-visible{color:#fff;border-color:var(--rumegus)}
+.tel-sus{
+  background:var(--rumegus);color:#1B1206;text-decoration:none;font-weight:600;font-size:15px;
+  padding:9px 16px;border-radius:2px;white-space:nowrap;
+}
+.meniu-buton{display:none;background:none;border:1px solid #43584a;color:#EDF1EC;border-radius:2px;padding:8px 12px;font-size:15px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;background:var(--padure);color:#EDF1EC;overflow:hidden}
+.hero picture,.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero img{opacity:.42;filter:saturate(.85)}
+.hero-mask{position:absolute;inset:0;background:linear-gradient(100deg,rgba(23,35,28,.93) 12%,rgba(23,35,28,.55) 70%,rgba(23,35,28,.35))}
+.hero-cont{position:relative;padding:104px 0 92px;max-width:660px}
+.hero h1{font-size:clamp(2.3rem,5.6vw,4rem);letter-spacing:-.025em}
+.hero h1 em{font-style:normal;display:block;color:var(--rumegus)}
+.hero p{margin-top:22px;font-size:clamp(1rem,1.9vw,1.18rem);color:#C6D2C7;max-width:52ch}
+.hero-actiuni{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.buton{
+  display:inline-block;text-decoration:none;font-weight:600;font-size:16px;
+  padding:14px 26px;border-radius:2px;border:1px solid transparent;
+}
+.buton-plin{background:var(--rumegus);color:#1B1206}
+.buton-plin:hover{background:#EAB13B}
+.buton-gol{border-color:#5E7364;color:#DDE5DD}
+.buton-gol:hover{border-color:#95A996;background:rgba(255,255,255,.05)}
+
+/* ---------- lista de servicii pe scurt ---------- */
+.rezumat{background:var(--alb);border-bottom:1px solid var(--linie)}
+.rezumat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.rezumat-grid a{
+  text-decoration:none;padding:28px 24px 30px;border-right:1px solid var(--linie);
+  display:block;transition:background .15s;
+}
+.rezumat-grid a:last-child{border-right:0}
+.rezumat-grid a:hover{background:#F4F6F2}
+.rezumat h3{font-size:1.12rem;margin-bottom:6px}
+.rezumat p{font-size:.93rem;color:var(--gri);margin:0}
+
+/* ---------- sectiuni serviciu ---------- */
+.serviciu{padding:78px 0 6px;border-top:1px solid var(--linie)}
+.serviciu:first-of-type{border-top:0}
+.serviciu-cap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+.serviciu h2{font-size:clamp(1.9rem,3.6vw,2.7rem);letter-spacing:-.02em;margin-bottom:18px}
+.serviciu h2::after{content:"";display:block;width:54px;height:4px;background:var(--rumegus);margin-top:16px}
+.intro{font-size:1.06rem}
+.include{background:var(--alb);border:1px solid var(--linie);padding:26px 28px}
+.include h3{font-size:1rem;font-weight:600;font-family:Inter,sans-serif;margin-bottom:14px}
+.include ul{margin:0;padding:0;list-style:none}
+.include li{position:relative;padding-left:24px;margin-bottom:11px;font-size:.97rem;line-height:1.5}
+.include li:last-child{margin-bottom:0}
+.include li::before{
+  content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;
+  background:var(--frunza);border-radius:50%;
+}
+.nota{
+  margin-top:26px;padding-left:20px;border-left:3px solid var(--muschi);
+  color:#3D4C42;font-size:.98rem;
+}
+
+/* ---------- galerie ---------- */
+.galerie{margin-top:44px;padding-bottom:72px}
+.galerie-titlu{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:26px}
+.galerie-titlu h3{font-size:1.15rem}
+.galerie-titlu span{font-size:.9rem;color:var(--gri)}
+
+.grup-an{margin-bottom:38px}
+.grup-an:last-child{margin-bottom:0}
+.an-eticheta{
+  display:flex;align-items:center;gap:14px;margin-bottom:20px;
+}
+.an-eticheta .cifra{
+  font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.7rem;
+  color:var(--muschi);letter-spacing:-.01em;
+}
+.an-eticheta .linie{flex:1;height:1px;background:var(--linie)}
+.lucrare{margin-bottom:26px}
+.lucrare:last-child{margin-bottom:0}
+.lucrare-cap{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.lucrare-cap h4{font-size:1rem;font-weight:600;font-family:Inter,sans-serif;color:var(--text)}
+.lucrare-cap .data{font-size:.87rem;color:var(--gri)}
+.lucrare-cap .nr{font-size:.8rem;color:var(--gri)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.grid button{
+  padding:0;border:0;background:#DDE0DA;cursor:pointer;overflow:hidden;
+  aspect-ratio:4/3;position:relative;display:block;
+}
+.grid img{width:100%;height:100%;object-fit:cover;transition:transform .3s ease}
+.grid button:hover img,.grid button:focus-visible img{transform:scale(1.05)}
+.grid button:focus-visible{outline:3px solid var(--rumegus);outline-offset:2px}
+
+.gol{
+  border:1px dashed #B9C0B7;background:#F4F6F2;padding:34px 28px;text-align:center;
+  color:var(--gri);font-size:.97rem;
+}
+
+/* ---------- lightbox ---------- */
+.lb{
+  position:fixed;inset:0;z-index:80;background:rgba(12,18,14,.96);
+  display:none;align-items:center;justify-content:center;
+}
+.lb.deschis{display:flex}
+.lb img{max-width:92vw;max-height:82vh;object-fit:contain}
+.lb-inchide,.lb-nav{
+  position:absolute;background:rgba(255,255,255,.1);border:0;color:#fff;
+  cursor:pointer;border-radius:50%;display:grid;place-items:center;
+}
+.lb-inchide{top:18px;right:18px;width:46px;height:46px;font-size:26px;line-height:1}
+.lb-nav{top:50%;transform:translateY(-50%);width:52px;height:52px;font-size:28px}
+.lb-prec{left:14px}
+.lb-urm{right:14px}
+.lb-inchide:hover,.lb-nav:hover{background:rgba(255,255,255,.22)}
+.lb-contor{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);color:#B9C4BA;font-size:.9rem}
+
+/* ---------- contact ---------- */
+.contact{background:var(--padure);color:#E6ECE6;padding:76px 0}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.contact h2{font-size:clamp(1.8rem,3.4vw,2.5rem);letter-spacing:-.02em;margin-bottom:16px}
+.contact p{color:#B6C3B7;max-width:48ch}
+.date{list-style:none;margin:0;padding:0}
+.date li{padding:15px 0;border-bottom:1px solid #2C3E31;font-size:1.02rem}
+.date li:first-child{border-top:1px solid #2C3E31}
+.date b{display:block;font-weight:500;font-size:.85rem;color:#8FA292;margin-bottom:2px}
+.date a{text-decoration:none}
+.date a:hover{color:var(--rumegus)}
+footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-align:center}
+
+@media(max-width:900px){
+  .serviciu-cap{grid-template-columns:1fr;gap:30px}
+  .contact-grid{grid-template-columns:1fr;gap:34px}
+  .rezumat-grid{grid-template-columns:1fr 1fr}
+  .rezumat-grid a{border-bottom:1px solid var(--linie)}
+  .rezumat-grid a:nth-child(2){border-right:0}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  nav{display:none}
+  nav.deschis{display:block;position:absolute;left:0;right:0;top:100%;background:var(--padure);padding:8px 4vw 18px}
+  nav.deschis ul{flex-direction:column;gap:0}
+  nav.deschis li{border-top:1px solid #2C3E31}
+  nav.deschis a{display:block;padding:13px 0;border:0}
+  .meniu-buton{display:block}
+  .bara{position:relative}
+  .tel-sus{display:none}
+  .hero-cont{padding:64px 0 58px}
+  .rezumat-grid{grid-template-columns:1fr}
+  .rezumat-grid a{border-right:0}
+  .serviciu{padding-top:54px}
+  .grid{grid-template-columns:1fr 1fr;gap:8px}
+  .lb-nav{width:44px;height:44px}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bara">
+    <a class="marca" href="#">Numele<span>Firmei</span></a>
+    <button class="meniu-buton" id="meniuBtn" aria-expanded="false" aria-controls="meniu">Meniu</button>
+    <nav id="meniu">
+      <ul>
+        <li><a href="#gard">Montaj gard</a></li>
+        <li><a href="#gazon">Tuns gazon</a></li>
+        <li><a href="#radacini">Scoatere rădăcini</a></li>
+        <li><a href="#gard-viu">Tuns gard viu</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="tel-sus" href="tel:+40700000000">07XX XXX XXX</a>
+  </div>
+</header>
+
+<section class="hero">
+  <img src="imagini/radacini/radacini-02.jpg" alt="Freză de cioate la lucru în curtea unei case">
+  <div class="hero-mask"></div>
+  <div class="wrap hero-cont">
+    <h1>Grădina ta,<em>lăsată la punct.</em></h1>
+    <p>Montăm garduri, tundem gazon și gard viu și scoatem cioatele rămase după tăierea copacilor. Venim cu utilaje proprii, lucrăm curat și strângem totul după noi.</p>
+    <div class="hero-actiuni">
+      <a class="buton buton-plin" href="#contact">Cere o ofertă</a>
+      <a class="buton buton-gol" href="#radacini">Vezi lucrări</a>
+    </div>
+  </div>
+</section>
+
+<section class="rezumat">
+  <div class="wrap">
+    <div class="rezumat-grid">
+      <a href="#gard"><h3>Montaj gard</h3><p>Panouri, plasă, lemn, porți pietonale și auto.</p></a>
+      <a href="#gazon"><h3>Tuns gazon</h3><p>Lucrare unică sau abonament pe tot sezonul.</p></a>
+      <a href="#radacini"><h3>Scoatere rădăcini</h3><p>Frezare cioate și eliberarea terenului.</p></a>
+      <a href="#gard-viu"><h3>Tuns gard viu</h3><p>Tuia, buxus, ligustru — tăiat și modelat.</p></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MONTAJ GARD ============ -->
+<section class="serviciu" id="gard">
+  <div class="wrap">
+    <div class="serviciu-cap">
+      <div>
+        <h2>Montaj gard</h2>
+        <p class="intro">Montăm garduri la cheie, de la măsurători și trasare până la ultimul panou fixat. Lucrăm cu panouri bordurate, plasă zincată, șipcă din lemn, gard tip jaluzea și profile metalice, adaptate la terenul și stilul proprietății.</p>
+        <p class="nota">Un gard bine montat înseamnă stâlpi drepți, distanțe egale și fundație corectă. De asta depinde dacă rezistă 3 ani sau 20.</p>
+      </div>
+      <div class="include">
+        <h3>Ce include lucrarea</h3>
+        <ul>
+          <li>Măsurători pe teren și calcularea exactă a materialelor</li>
+          <li>Săpat gropi și betonat stâlpi, cu aliniere pe nivel</li>
+          <li>Montaj panouri, porți pietonale și porți auto batante sau culisante</li>
+          <li>Finisaje: capace stâlpi, benzi PVC de intimitate, soclu de beton</li>
+          <li>Curățenie la final și evacuarea resturilor</li>
+        </ul>
+      </div>
+    </div>
+    <div class="galerie">
+      <div class="gol">Pozele de la lucrările de montaj gard urmează să fie adăugate aici.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TUNS GAZON ============ -->
+<section class="serviciu" id="gazon">
+  <div class="wrap">
+    <div class="serviciu-cap">
+      <div>
+        <h2>Tuns gazon</h2>
+        <p class="intro">Ne ocupăm de tunsul gazonului fie ca lucrare unică, fie ca abonament sezonier, cu vizite la 1–2 săptămâni. Reglăm înălțimea de tăiere în funcție de tipul de gazon și de sezon, ca iarba să rămână deasă și verde, nu arsă de soare.</p>
+        <p class="nota">Recomandăm ritm regulat: gazonul tuns des devine mai des și sufocă buruienile de la sine.</p>
+      </div>
+      <div class="include">
+        <h3>Ce include lucrarea</h3>
+        <ul>
+          <li>Tuns uniform cu mașină profesională</li>
+          <li>Finisaje cu trimmer pe lângă garduri, alei, pomi și borduri</li>
+          <li>Delimitarea marginilor pentru un contur curat</li>
+          <li>Strângerea și evacuarea ierbii tăiate</li>
+          <li>Suflantă pentru curățarea aleilor și a terasei</li>
+        </ul>
+      </div>
+    </div>
+    <div class="galerie">
+      <div class="gol">Pozele de la lucrările de tuns gazon urmează să fie adăugate aici.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SCOATERE RADACINI ============ -->
+<section class="serviciu" id="radacini">
+  <div class="wrap">
+    <div class="serviciu-cap">
+      <div>
+        <h2>Scoatere rădăcini din pământ</h2>
+        <p class="intro">Scoatem cioate și rădăcini rămase după tăierea copacilor, ca terenul să poată fi folosit mai departe — pentru gazon, pavaj, fundație sau plantări noi. Lucrăm atât manual, în spații înguste sau lângă utilități, cât și mecanizat, cu freză de cioate, pentru rădăcini mari.</p>
+        <p class="nota">O cioată lăsată în pământ atrage insecte, ciuperci și dă lăstari an de an. Scoasă corect, problema se închide definitiv.</p>
+      </div>
+      <div class="include">
+        <h3>Ce include lucrarea</h3>
+        <ul>
+          <li>Evaluarea rădăcinii și verificarea zonei înainte de săpare</li>
+          <li>Decopertare și extragerea completă a cioatei, nu doar tăierea la nivelul solului</li>
+          <li>Îndepărtarea rădăcinilor secundare care pot lăstări din nou</li>
+          <li>Umplerea și nivelarea gropii cu pământ</li>
+          <li>Încărcarea și evacuarea materialului lemnos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="galerie">
+      <div class="galerie-titlu">
+        <h3>Lucrări executate</h3>
+        <span>Apasă pe o poză pentru a o mări</span>
+      </div>
+      <div id="galerieRadacini"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TUNS GARD VIU ============ -->
+<section class="serviciu" id="gard-viu">
+  <div class="wrap">
+    <div class="serviciu-cap">
+      <div>
+        <h2>Tuns gard viu</h2>
+        <p class="intro">Tundem și modelăm gard viu de orice tip — tuia, buxus, ligustru, leylandi, lemn câinesc — cu tăieri care păstrează forma și stimulează îndesirea plantei. Corectăm și garduri vii crescute haotic sau golite la bază.</p>
+        <p class="nota">Momentul potrivit contează: tuia și buxusul se tund altfel primăvara față de toamnă, iar noi ajustăm tăierea în funcție de sezon.</p>
+      </div>
+      <div class="include">
+        <h3>Ce include lucrarea</h3>
+        <ul>
+          <li>Tuns pe linie dreaptă, cu laterale și parte superioară uniforme</li>
+          <li>Modelare pe formă: dreptunghi, trapez, formă liberă</li>
+          <li>Reducerea înălțimii și îngustarea gardurilor prea late</li>
+          <li>Eliminarea ramurilor uscate și a porțiunilor bolnave</li>
+          <li>Strângerea și evacuarea completă a resturilor vegetale</li>
+        </ul>
+      </div>
+    </div>
+    <div class="galerie">
+      <div class="gol">Pozele de la lucrările de tuns gard viu urmează să fie adăugate aici.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Spune-ne ce ai de făcut în curte</h2>
+      <p>Trimite câteva poze și dimensiunile aproximative și îți spunem cât durează și cât costă. Deplasarea pentru măsurători se face în aceeași zonă, fără costuri suplimentare.</p>
+    </div>
+    <ul class="date">
+      <li><b>Telefon</b><a href="tel:+40700000000">07XX XXX XXX</a></li>
+      <li><b>E-mail</b><a href="mailto:contact@exemplu.ro">contact@exemplu.ro</a></li>
+      <li><b>Zona de lucru</b>Orașul și localitățile din jur, pe o rază de 40 km</li>
+      <li><b>Program</b>Luni – Sâmbătă, 08:00 – 19:00</li>
+    </ul>
+  </div>
+</section>
+
+<footer>© <span id="an"></span> Numele Firmei · Amenajări și întreținere spații verzi</footer>
+
+<!-- lightbox -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Poză mărită">
+  <button class="lb-inchide" id="lbInchide" aria-label="Închide">&times;</button>
+  <button class="lb-nav lb-prec" id="lbPrec" aria-label="Poza anterioară">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-urm" id="lbUrm" aria-label="Poza următoare">&#8250;</button>
+  <div class="lb-contor" id="lbContor"></div>
+</div>
+
+<script>
+document.getElementById('an').textContent = new Date().getFullYear();
+
+/* meniu pe telefon */
+var mb = document.getElementById('meniuBtn'), mn = document.getElementById('meniu');
+mb.addEventListener('click', function(){
+  var d = mn.classList.toggle('deschis');
+  mb.setAttribute('aria-expanded', d);
+});
+mn.addEventListener('click', function(e){
+  if(e.target.tagName === 'A'){ mn.classList.remove('deschis'); mb.setAttribute('aria-expanded','false'); }
+});
+
+/* ---- galeria: grupată pe ani și pe lucrări distincte ---- */
+var lucrariRadacini = [
+  { an: 2022, titlu: 'Curte cu mai multe cioate de scos', data: '25–26 aprilie', poze: [
+    {f:'radacini-08', a:'Cioate rămase după tăierea copacilor, înainte de lucrare'},
+    {f:'radacini-09', a:'Curte cu mai multe cioate de scos'},
+    {f:'radacini-10', a:'Cioată mare pregătită pentru frezare'},
+    {f:'radacini-11', a:'Zona frezată, cu rumeguș strâns pentru evacuare'},
+    {f:'radacini-12', a:'Terenul eliberat după scoaterea rădăcinilor'},
+    {f:'radacini-13', a:'Sol nivelat lângă casă după frezarea cioatei'},
+    {f:'radacini-14', a:'Curte curată după finalizarea lucrării'},
+    {f:'radacini-15', a:'Terenul pregătit pentru gazon sau pavaj'}
+  ]},
+  { an: 2022, titlu: 'Cioată lângă intrarea casei', data: '18 mai', poze: [
+    {f:'radacini-06', a:'Freză de cioate profesională lângă rădăcina decopertată'}
+  ]},
+  { an: 2023, titlu: 'Măsurare și frezare cioată mare', data: '30 mai', poze: [
+    {f:'radacini-07', a:'Freză de cioate la marginea drumului'},
+    {f:'radacini-16', a:'Măsurarea diametrului cioatei înainte de ofertă'},
+    {f:'radacini-17', a:'Măsurarea unei cioate de peste 30 cm'},
+    {f:'radacini-18', a:'Cioată de mari dimensiuni, măsurată la 80 cm'},
+    {f:'radacini-19', a:'Cioată mare frezată, gata pentru evacuarea rumegușului'},
+    {f:'radacini-20', a:'Groapă rămasă după scoaterea unei rădăcini, aproape de gard'}
+  ]},
+  { an: 2023, titlu: 'Frezare pe pajiște', data: '9 iunie', poze: [
+    {f:'radacini-21', a:'Bucată de rădăcină scoasă manual, lăsată pe suprafață'},
+    {f:'radacini-22', a:'Cioată parțial dezgropată, cu rădăcini vizibile la suprafață'},
+    {f:'radacini-23', a:'Cioată tăiată din curte, în timpul verii'},
+    {f:'radacini-24', a:'Aceeași cioată, la finalul lucrării de tăiere'},
+    {f:'radacini-25', a:'Freză de cioate la lucru pe pajiște, lângă un pom tânăr'},
+    {f:'radacini-26', a:'Movilă de rumeguș rămasă după frezarea cioatei, pe gazon'},
+    {f:'radacini-27', a:'Zona nivelată după frezare, lângă gardul viu'}
+  ]},
+  { an: 2024, titlu: 'Cioată mare în curte', data: '19 aprilie', poze: [
+    {f:'radacini-28', a:'Cioată mare frezată, gata pentru evacuarea rumegușului din curte'},
+    {f:'radacini-29', a:'Groapă cu rumeguș rămasă după frezarea unei cioate'},
+    {f:'radacini-30', a:'Cioată tăiată jos și dezgropată în curte'}
+  ]},
+  { an: 2024, titlu: 'Freză lângă intrarea casei', data: '8 septembrie', poze: [
+    {f:'radacini-01', a:'Freză de cioate pregătită lângă intrarea casei'},
+    {f:'radacini-02', a:'Frezarea unei cioate mari în fața casei'},
+    {f:'radacini-03', a:'Freză de cioate la lucru lângă peretele casei'},
+    {f:'radacini-04', a:'Cioată frezată și groapa plină de rumeguș'},
+    {f:'radacini-05', a:'Curățarea pavajului după frezarea cioatei'}
+  ]},
+  { an: 2025, titlu: 'Casă cu structură pe lemn', data: '30 mai', poze: [
+    {f:'radacini-31', a:'Freză de cioate la lucru lângă o casă cu structură pe lemn'},
+    {f:'radacini-32', a:'Movile de rumeguș rezultate din frezarea a două cioate'}
+  ]},
+  { an: 2025, titlu: 'Trunchi decorativ folosit ca ghiveci', data: '20 noiembrie', poze: [
+    {f:'radacini-33', a:'Trunchi gol folosit ca ghiveci decorativ, lângă o cioată proaspăt tăiată'}
+  ]},
+  { an: 2026, titlu: 'Zonă lângă piscină', data: '10 iunie', poze: [
+    {f:'radacini-34', a:'Rumeguș adunat pe iarbă după frezarea unei cioate'},
+    {f:'radacini-35', a:'Freză de cioate lângă piscină, cu prelate de protecție puse peste tufe'},
+    {f:'radacini-36', a:'Zona din jurul piscinei, curățată după scoaterea rădăcinii'}
+  ]},
+  { an: 2026, titlu: 'Cioate lângă gard și perete metalic', data: '19–22 iunie', poze: [
+    {f:'radacini-37', a:'Bucăți din cioată tăiată, pregătite pentru evacuare'},
+    {f:'radacini-38', a:'Groapă rămasă după scoaterea completă a unei cioate mari'},
+    {f:'radacini-39', a:'Vedere de sus a gropii, cu rămășițe de rădăcină la fund'},
+    {f:'radacini-40', a:'Freză de cioate lângă o cioată aproape frezată complet'},
+    {f:'radacini-41', a:'Cioată frezată, cu urme de rumeguș roșiatic pe sol'},
+    {f:'radacini-42', a:'Movilă de rumeguș rezultată din frezarea unei cioate mari'},
+    {f:'radacini-43', a:'Freza de cioate pregătită pentru următoarea zonă de lucru'},
+    {f:'radacini-44', a:'Zona finalizată, nivelată și acoperită cu rumeguș'}
+  ]}
+];
+
+/* lista plată, în ordinea de afișare — folosită de lightbox */
+var pozeRadacini = [];
+lucrariRadacini.forEach(function(l){ l.poze.forEach(function(p){ pozeRadacini.push(p); }); });
+
+var containerGalerie = document.getElementById('galerieRadacini');
+var anCurent = null, indexGlobal = 0;
+lucrariRadacini.forEach(function(lucrare){
+  if(lucrare.an !== anCurent){
+    anCurent = lucrare.an;
+    var etAn = document.createElement('div');
+    etAn.className = 'an-eticheta';
+    etAn.innerHTML = '<span class="cifra">' + anCurent + '</span><span class="linie"></span>';
+    containerGalerie.appendChild(etAn);
+    var grupAn = document.createElement('div');
+    grupAn.className = 'grup-an';
+    containerGalerie.appendChild(grupAn);
+  }
+  var grupActual = containerGalerie.querySelector('.grup-an:last-of-type');
+  var wrap = document.createElement('div');
+  wrap.className = 'lucrare';
+  var cap = document.createElement('div');
+  cap.className = 'lucrare-cap';
+  cap.innerHTML = '<h4>' + lucrare.titlu + '</h4><span class="data">' + lucrare.data + '</span><span class="nr">· ' + lucrare.poze.length + ' poze</span>';
+  wrap.appendChild(cap);
+  var grid = document.createElement('div');
+  grid.className = 'grid';
+  lucrare.poze.forEach(function(p){
+    var i = indexGlobal++;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', 'Deschide poza ' + (i+1) + ': ' + p.a);
+    b.dataset.index = i;
+    b.innerHTML = '<img src="imagini/radacini/' + p.f + '-mic.jpg" alt="' + p.a + '" loading="lazy" width="800" height="600">';
+    grid.appendChild(b);
+  });
+  wrap.appendChild(grid);
+  grupActual.appendChild(wrap);
+});
+var galerie = containerGalerie; /* delegarea click-urilor se face pe container, mai jos */
+
+/* ---- lightbox ---- */
+var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
+    lbContor = document.getElementById('lbContor'), curent = 0, ultimButon = null;
+
+function arata(i){
+  curent = (i + pozeRadacini.length) % pozeRadacini.length;
+  var p = pozeRadacini[curent];
+  lbImg.src = 'imagini/radacini/' + p.f + '.jpg';
+  lbImg.alt = p.a;
+  lbContor.textContent = (curent + 1) + ' / ' + pozeRadacini.length;
+}
+function deschide(i, buton){
+  ultimButon = buton || null;
+  arata(i);
+  lb.classList.add('deschis');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lbInchide').focus();
+}
+function inchide(){
+  lb.classList.remove('deschis');
+  lbImg.src = '';
+  document.body.style.overflow = '';
+  if(ultimButon) ultimButon.focus();
+}
+
+galerie.addEventListener('click', function(e){
+  var b = e.target.closest('button');
+  if(b) deschide(parseInt(b.dataset.index, 10), b);
+});
+document.getElementById('lbInchide').addEventListener('click', inchide);
+document.getElementById('lbPrec').addEventListener('click', function(){ arata(curent - 1); });
+document.getElementById('lbUrm').addEventListener('click', function(){ arata(curent + 1); });
+lb.addEventListener('click', function(e){ if(e.target === lb) inchide(); });
+document.addEventListener('keydown', function(e){
+  if(!lb.classList.contains('deschis')) return;
+  if(e.key === 'Escape') inchide();
+  if(e.key === 'ArrowLeft') arata(curent - 1);
+  if(e.key === 'ArrowRight') arata(curent + 1);
+});
+
+/* glisare cu degetul pe telefon */
+var x0 = null;
+lb.addEventListener('touchstart', function(e){ x0 = e.changedTouches[0].clientX; }, {passive:true});
+lb.addEventListener('touchend', function(e){
+  if(x0 === null) return;
+  var d = e.changedTouches[0].clientX - x0;
+  if(Math.abs(d) > 45) arata(curent + (d < 0 ? 1 : -1));
+  x0 = null;
+}, {passive:true});
+</script>
+</body>
+</html>
