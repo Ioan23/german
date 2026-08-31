@@ -124,6 +124,7 @@ nav a:hover,nav a:focus-visible{color:#fff;border-color:var(--rumegus)}
 .lucrare-cap h4{font-size:1rem;font-weight:600;font-family:Inter,sans-serif;color:var(--text)}
 .lucrare-cap .data{font-size:.87rem;color:var(--gri)}
 .lucrare-cap .nr{font-size:.8rem;color:var(--gri)}
+
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
 .grid button{
   padding:0;border:0;background:#DDE0DA;cursor:pointer;overflow:hidden;
@@ -330,7 +331,7 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
     <div class="serviciu-cap">
       <div>
         <h2>Tuns gard viu</h2>
-        <p class="intro">Tundem și modelăm gard viu de orice tip — tuia, buxus, ligustru, leylandi, lemn câinesc — cu tăieri care păstrează forma și stimulează îndesirea plantei. Corectăm și garduri vii crescute haotic sau golite la bază.</p>
+        <p class="intro">Tundem și modelăm gard viu de orice tip — tuia, buxus, ligustru, leylandi, lemn câinesc, laur, fag — cu tăieri care păstrează forma și stimulează îndesirea plantei. Corectăm și garduri vii crescute haotic sau golite la bază.</p>
         <p class="nota">Momentul potrivit contează: tuia și buxusul se tund altfel primăvara față de toamnă, iar noi ajustăm tăierea în funcție de sezon.</p>
       </div>
       <div class="include">
@@ -344,8 +345,13 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
         </ul>
       </div>
     </div>
+
     <div class="galerie">
-      <div class="gol">Pozele de la lucrările de tuns gard viu urmează să fie adăugate aici.</div>
+      <div class="galerie-titlu">
+        <h3>Lucrări executate</h3>
+        <span>Apasă pe o poză pentru a o mări</span>
+      </div>
+      <div id="galerieGardViu"></div>
     </div>
   </div>
 </section>
@@ -390,7 +396,65 @@ mn.addEventListener('click', function(e){
   if(e.target.tagName === 'A'){ mn.classList.remove('deschis'); mb.setAttribute('aria-expanded','false'); }
 });
 
-/* ---- galeria: grupată pe ani și pe lucrări distincte ---- */
+/* ================================================================
+   SISTEM GENERIC DE GALERII GRUPATE PE ANI + LUCRĂRI
+   Ca să adaugi o galerie nouă (ex. pentru "gard" sau "gazon"):
+   1. Adaugă în index.html un <div id="galerieNumeNou"></div>
+   2. Defineste un array "lucrariNumeNou" (vezi exemplele de mai jos)
+   3. Apelează initGalerie('numeNou', 'galerieNumeNou', 'folder-poze', lucrariNumeNou);
+   ================================================================ */
+
+var galeriiInregistrate = {}; /* {cheie: {poze:[...], folder:'...'}} */
+
+function initGalerie(cheie, idContainer, folder, lucrari){
+  var container = document.getElementById(idContainer);
+  if(!container) return;
+
+  var pozeFlate = [];
+  lucrari.forEach(function(l){ l.poze.forEach(function(p){ pozeFlate.push(p); }); });
+  galeriiInregistrate[cheie] = { poze: pozeFlate, folder: folder };
+
+  var anCurent = null, indexGlobal = 0, grupActual = null;
+  lucrari.forEach(function(lucrare){
+    if(lucrare.an !== anCurent){
+      anCurent = lucrare.an;
+      var etAn = document.createElement('div');
+      etAn.className = 'an-eticheta';
+      etAn.innerHTML = '<span class="cifra">' + anCurent + '</span><span class="linie"></span>';
+      container.appendChild(etAn);
+      grupActual = document.createElement('div');
+      grupActual.className = 'grup-an';
+      container.appendChild(grupActual);
+    }
+    var wrap = document.createElement('div');
+    wrap.className = 'lucrare';
+    var cap = document.createElement('div');
+    cap.className = 'lucrare-cap';
+    cap.innerHTML = '<h4>' + lucrare.titlu + '</h4><span class="data">' + lucrare.data + '</span><span class="nr">· ' + lucrare.poze.length + ' poze</span>';
+    wrap.appendChild(cap);
+    var grid = document.createElement('div');
+    grid.className = 'grid';
+    lucrare.poze.forEach(function(p){
+      var i = indexGlobal++;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('aria-label', 'Deschide poza ' + (i+1) + ': ' + p.a);
+      b.dataset.galerie = cheie;
+      b.dataset.index = i;
+      b.innerHTML = '<img src="imagini/' + folder + '/' + p.f + '-mic.jpg" alt="' + p.a + '" loading="lazy" width="800" height="600">';
+      grid.appendChild(b);
+    });
+    wrap.appendChild(grid);
+    grupActual.appendChild(wrap);
+  });
+
+  container.addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if(b) deschideLightbox(b.dataset.galerie, parseInt(b.dataset.index, 10), b);
+  });
+}
+
+/* ---- date: scoatere rădăcini ---- */
 var lucrariRadacini = [
   { an: 2022, titlu: 'Curte cu mai multe cioate de scos', data: '25–26 aprilie', poze: [
     {f:'radacini-08', a:'Cioate rămase după tăierea copacilor, înainte de lucrare'},
@@ -458,84 +522,122 @@ var lucrariRadacini = [
   ]}
 ];
 
-/* lista plată, în ordinea de afișare — folosită de lightbox */
-var pozeRadacini = [];
-lucrariRadacini.forEach(function(l){ l.poze.forEach(function(p){ pozeRadacini.push(p); }); });
+/* ---- date: tuns gard viu ---- */
+var lucrariGardViu = [
+  { an: 2021, titlu: 'Gard de tuia lângă stradă și benzinărie', data: '12 octombrie', poze: [
+    {f:'gardviu-01', a:'Gard de tuia tuns, lângă un drum cu benzinărie în zare'}
+  ]},
+  { an: 2022, titlu: 'Gard de tuia, pregătire cu scară', data: '29 septembrie', poze: [
+    {f:'gardviu-02', a:'Gard de tuia proaspăt tuns, cu scară și unelte pe iarbă'}
+  ]},
+  { an: 2022, titlu: 'Gard de laur, corectare de toamnă', data: '22–24 octombrie', poze: [
+    {f:'gardviu-03', a:'Gard viu de laur tuns, în spatele unei case cu acoperiș roșu'},
+    {f:'gardviu-04', a:'Tuns cu prăjină telescopică pe partea de sus a gardului de laur'},
+    {f:'gardviu-05', a:'Gard de laur după corectarea înălțimii'}
+  ]},
+  { an: 2023, titlu: 'Gard de tuia lângă bloc', data: '6 mai, dimineața', poze: [
+    {f:'gardviu-06', a:'Gard de tuia tuns lângă un bloc, cu scară pregătită'},
+    {f:'gardviu-07', a:'Gard de tuia văzut de la distanță, lângă parcare'},
+    {f:'gardviu-08', a:'Scară lângă gardul de tuia proaspăt tuns'},
+    {f:'gardviu-09', a:'Gard de tuia cu conuri de semnalizare pentru siguranță'}
+  ]},
+  { an: 2023, titlu: 'Gard de tuia lângă alee', data: '6 mai, la prânz', poze: [
+    {f:'gardviu-10', a:'Alee cu pietriș lângă un gard de tuia tuns drept'},
+    {f:'gardviu-11', a:'Gard de tuia văzut de foarte aproape, cu o dubă DHL în fundal'},
+    {f:'gardviu-12', a:'Suprafața tunsă a gardului de tuia, cu flori mov în fundal'}
+  ]},
+  { an: 2023, titlu: 'Gard de tuia lângă terasă', data: '6 mai, după-amiază', poze: [
+    {f:'gardviu-21', a:'Gard de tuia tuns, lângă o terasă cu copertină roșie'},
+    {f:'gardviu-22', a:'Gard de tuia văzut de aproape, proaspăt tuns'}
+  ]},
+  { an: 2023, titlu: 'Gard de tuia cu remorcă pregătită', data: '8 mai', poze: [
+    {f:'gardviu-23', a:'Gard de tuia tuns în formă de cub, lângă o remorcă'},
+    {f:'gardviu-24', a:'Alee lângă gardul de tuia proaspăt tuns'}
+  ]},
+  { an: 2023, titlu: 'Gard de tuia lângă zid de piatră', data: '8 mai', poze: [
+    {f:'gardviu-25', a:'Gard de tuia tuns, lângă un zid de piatră în terase'},
+    {f:'gardviu-26', a:'Curte cu zid de piatră și gard de tuia tuns în fundal'}
+  ]},
+  { an: 2023, titlu: 'Gard tuns la un showroom de motociclete', data: '2 iunie', poze: [
+    {f:'gardviu-27', a:'Gard tuns rotund, lângă un showroom de motociclete'},
+    {f:'gardviu-28', a:'Gard tuns la colțul clădirii showroom-ului'}
+  ]},
+  { an: 2023, titlu: 'Gard de tuia lângă casă cu pergolă', data: '6 iunie, dimineața', poze: [
+    {f:'gardviu-29', a:'Gard de tuia înalt, tuns drept, pe lângă gazon'},
+    {f:'gardviu-30', a:'Gard de tuia tuns, cu o pergolă vizibilă în curte'}
+  ]},
+  { an: 2023, titlu: 'Gard înalt cu tunel tăiat prin el', data: '6 iunie, după-amiază', poze: [
+    {f:'gardviu-31', a:'Gard înalt tuns, cu tufe de zmeur în față'},
+    {f:'gardviu-32', a:'Curte cu gard tuns, scară și unelte de grădină'},
+    {f:'gardviu-33', a:'Tunel tăiat prin gardul înalt, ca trecere între curți'},
+    {f:'gardviu-34', a:'Tunelul din gard, văzut din partea cealaltă'}
+  ]},
+  { an: 2023, titlu: 'Gard de tuia tuns lângă alee', data: '14 septembrie', poze: [
+    {f:'gardviu-35', a:'Foarfecă electrică la tunsul unui gard de tuia lângă alee'}
+  ]},
+  { an: 2024, titlu: 'Gard de laur tuns iarna', data: '10 februarie', poze: [
+    {f:'gardviu-36', a:'Gard de laur tuns, în timpul iernii'},
+    {f:'gardviu-37', a:'Tufe rotunde tunse, cu un balansoar pentru copii în curte'}
+  ]},
+  { an: 2024, titlu: 'Gard înalt de-a lungul unui drum', data: '12 iunie', poze: [
+    {f:'gardviu-38', a:'Gard înalt tuns drept, de-a lungul unui drum de țară'}
+  ]},
+  { an: 2024, titlu: 'Gard de tuia tuns, toamna', data: '12 noiembrie', poze: [
+    {f:'gardviu-39', a:'Gard de tuia tuns toamna, cu scară și unelte pe iarbă'},
+    {f:'gardviu-40', a:'Gard de tuia tuns, cu o macara vizibilă în zare'}
+  ]},
+  { an: 2025, titlu: 'Mai multe garduri vii tunse într-o singură zi', data: '7 august', poze: [
+    {f:'gardviu-13', a:'Gard viu de fag roșu, lângă un câmp de porumb, înainte de tuns'},
+    {f:'gardviu-14', a:'Lăstari roșii ai fagului, netunși încă, lângă câmp'},
+    {f:'gardviu-15', a:'Gard de fag roșu tuns, cu o seră vizibilă în curte'},
+    {f:'gardviu-16', a:'Tunsul gardului de fag cu foarfeca electrică'},
+    {f:'gardviu-17', a:'Gard viu cu foliaj des, lângă câmp și o casă cu acoperiș roșu'},
+    {f:'gardviu-18', a:'Gard viu tuns drept, cu iarbă înaltă lângă el'},
+    {f:'gardviu-19', a:'Gard viu tuns, în fața unei case cu acoperiș roșu'},
+    {f:'gardviu-20', a:'Gard viu tuns de-a lungul unui drum, cu o casă albă în fundal'}
+  ]}
+];
 
-var containerGalerie = document.getElementById('galerieRadacini');
-var anCurent = null, indexGlobal = 0;
-lucrariRadacini.forEach(function(lucrare){
-  if(lucrare.an !== anCurent){
-    anCurent = lucrare.an;
-    var etAn = document.createElement('div');
-    etAn.className = 'an-eticheta';
-    etAn.innerHTML = '<span class="cifra">' + anCurent + '</span><span class="linie"></span>';
-    containerGalerie.appendChild(etAn);
-    var grupAn = document.createElement('div');
-    grupAn.className = 'grup-an';
-    containerGalerie.appendChild(grupAn);
-  }
-  var grupActual = containerGalerie.querySelector('.grup-an:last-of-type');
-  var wrap = document.createElement('div');
-  wrap.className = 'lucrare';
-  var cap = document.createElement('div');
-  cap.className = 'lucrare-cap';
-  cap.innerHTML = '<h4>' + lucrare.titlu + '</h4><span class="data">' + lucrare.data + '</span><span class="nr">· ' + lucrare.poze.length + ' poze</span>';
-  wrap.appendChild(cap);
-  var grid = document.createElement('div');
-  grid.className = 'grid';
-  lucrare.poze.forEach(function(p){
-    var i = indexGlobal++;
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.setAttribute('aria-label', 'Deschide poza ' + (i+1) + ': ' + p.a);
-    b.dataset.index = i;
-    b.innerHTML = '<img src="imagini/radacini/' + p.f + '-mic.jpg" alt="' + p.a + '" loading="lazy" width="800" height="600">';
-    grid.appendChild(b);
-  });
-  wrap.appendChild(grid);
-  grupActual.appendChild(wrap);
-});
-var galerie = containerGalerie; /* delegarea click-urilor se face pe container, mai jos */
+/* ---- inițializare galerii ---- */
+initGalerie('radacini', 'galerieRadacini', 'radacini', lucrariRadacini);
+initGalerie('gardviu', 'galerieGardViu', 'gardviu', lucrariGardViu);
 
-/* ---- lightbox ---- */
+/* ---- lightbox generic, funcționează pentru orice galerie înregistrată ---- */
 var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
-    lbContor = document.getElementById('lbContor'), curent = 0, ultimButon = null;
+    lbContor = document.getElementById('lbContor'), curent = 0, ultimButon = null, galerieCurenta = null;
 
-function arata(i){
-  curent = (i + pozeRadacini.length) % pozeRadacini.length;
-  var p = pozeRadacini[curent];
-  lbImg.src = 'imagini/radacini/' + p.f + '.jpg';
+function arataLightbox(i){
+  var g = galeriiInregistrate[galerieCurenta];
+  curent = (i + g.poze.length) % g.poze.length;
+  var p = g.poze[curent];
+  lbImg.src = 'imagini/' + g.folder + '/' + p.f + '.jpg';
   lbImg.alt = p.a;
-  lbContor.textContent = (curent + 1) + ' / ' + pozeRadacini.length;
+  lbContor.textContent = (curent + 1) + ' / ' + g.poze.length;
 }
-function deschide(i, buton){
+function deschideLightbox(cheie, i, buton){
+  galerieCurenta = cheie;
   ultimButon = buton || null;
-  arata(i);
+  arataLightbox(i);
   lb.classList.add('deschis');
   document.body.style.overflow = 'hidden';
   document.getElementById('lbInchide').focus();
 }
-function inchide(){
+function inchideLightbox(){
   lb.classList.remove('deschis');
   lbImg.src = '';
   document.body.style.overflow = '';
   if(ultimButon) ultimButon.focus();
 }
 
-galerie.addEventListener('click', function(e){
-  var b = e.target.closest('button');
-  if(b) deschide(parseInt(b.dataset.index, 10), b);
-});
-document.getElementById('lbInchide').addEventListener('click', inchide);
-document.getElementById('lbPrec').addEventListener('click', function(){ arata(curent - 1); });
-document.getElementById('lbUrm').addEventListener('click', function(){ arata(curent + 1); });
-lb.addEventListener('click', function(e){ if(e.target === lb) inchide(); });
+document.getElementById('lbInchide').addEventListener('click', inchideLightbox);
+document.getElementById('lbPrec').addEventListener('click', function(){ arataLightbox(curent - 1); });
+document.getElementById('lbUrm').addEventListener('click', function(){ arataLightbox(curent + 1); });
+lb.addEventListener('click', function(e){ if(e.target === lb) inchideLightbox(); });
 document.addEventListener('keydown', function(e){
   if(!lb.classList.contains('deschis')) return;
-  if(e.key === 'Escape') inchide();
-  if(e.key === 'ArrowLeft') arata(curent - 1);
-  if(e.key === 'ArrowRight') arata(curent + 1);
+  if(e.key === 'Escape') inchideLightbox();
+  if(e.key === 'ArrowLeft') arataLightbox(curent - 1);
+  if(e.key === 'ArrowRight') arataLightbox(curent + 1);
 });
 
 /* glisare cu degetul pe telefon */
@@ -544,7 +646,7 @@ lb.addEventListener('touchstart', function(e){ x0 = e.changedTouches[0].clientX;
 lb.addEventListener('touchend', function(e){
   if(x0 === null) return;
   var d = e.changedTouches[0].clientX - x0;
-  if(Math.abs(d) > 45) arata(curent + (d < 0 ? 1 : -1));
+  if(Math.abs(d) > 45) arataLightbox(curent + (d < 0 ? 1 : -1));
   x0 = null;
 }, {passive:true});
 </script>
