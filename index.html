@@ -263,7 +263,11 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
       </div>
     </div>
     <div class="galerie">
-      <div class="gol">Pozele de la lucrările de montaj gard urmează să fie adăugate aici.</div>
+      <div class="galerie-titlu">
+        <h3>Lucrări executate</h3>
+        <span>Apasă pe o poză pentru a o mări</span>
+      </div>
+      <div id="galerieGard"></div>
     </div>
   </div>
 </section>
@@ -683,9 +687,19 @@ var lucrariGardViu = [
   ]}
 ];
 
+var lucrariGard = [
+  { an: 2022, titlu: 'Montaj gard de lemn — pregătirea terenului și stâlpii', data: '05–07.04.2022', poze: [
+    {f:'gard-01', a:'Grădina din față înainte de lucrare, cu arbuștii tăiați scurt și containerul adus pentru resturi'},
+    {f:'gard-02', a:'Terenul curățat și nivelat, cu ancorele de stâlp fixate lângă zidul scund'},
+    {f:'gard-03', a:'Grădina pregătită, cu gazon nou pe o porțiune și ancorele aliniate pe linia gardului'},
+    {f:'gard-04', a:'Primul stâlp de lemn prins în cleme și adus la verticală, verificat cu nivela'}
+  ]}
+];
+
 /* ---- inițializare galerii ---- */
 initGalerie('radacini', 'galerieRadacini', 'radacini', lucrariRadacini);
 initGalerie('gardviu', 'galerieGardViu', 'gardviu', lucrariGardViu);
+initGalerie('gard', 'galerieGard', 'gard', lucrariGard);
 
 /* ---- lightbox generic, funcționează pentru orice galerie înregistrată ---- */
 var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
