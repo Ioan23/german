@@ -71,7 +71,7 @@ nav a:hover,nav a:focus-visible{color:#fff;border-color:var(--rumegus)}
 
 /* ---------- lista de servicii pe scurt ---------- */
 .rezumat{background:var(--alb);border-bottom:1px solid var(--linie)}
-.rezumat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.rezumat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0}
 .rezumat-grid a{
   text-decoration:none;padding:28px 24px 30px;border-right:1px solid var(--linie);
   display:block;transition:background .15s;
@@ -173,9 +173,10 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
 @media(max-width:900px){
   .serviciu-cap{grid-template-columns:1fr;gap:30px}
   .contact-grid{grid-template-columns:1fr;gap:34px}
-  .rezumat-grid{grid-template-columns:1fr 1fr}
+  .rezumat-grid{grid-template-columns:repeat(3,1fr)}
   .rezumat-grid a{border-bottom:1px solid var(--linie)}
-  .rezumat-grid a:nth-child(2){border-right:0}
+  .rezumat-grid a:nth-child(3n){border-right:0}
+  .rezumat-grid a:last-child{grid-column:span 2;border-right:0}
 }
 @media(max-width:640px){
   body{font-size:16px}
@@ -190,6 +191,7 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
   .hero-cont{padding:64px 0 58px}
   .rezumat-grid{grid-template-columns:1fr}
   .rezumat-grid a{border-right:0}
+  .rezumat-grid a:last-child{grid-column:auto}
   .serviciu{padding-top:54px}
   .grid{grid-template-columns:1fr 1fr;gap:8px}
   .lb-nav{width:44px;height:44px}
@@ -211,6 +213,7 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
         <li><a href="#gazon">Rasenpflege</a></li>
         <li><a href="#radacini">Wurzelentfernung</a></li>
         <li><a href="#gard-viu">Heckenschnitt</a></li>
+        <li><a href="#sturm">Sturmschaden</a></li>
         <li><a href="#contact">Kontakt</a></li>
       </ul>
     </nav>
@@ -238,6 +241,7 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
       <a href="#gazon"><h3>Rasenpflege</h3><p>Einmalig oder im Abo für die ganze Saison.</p></a>
       <a href="#radacini"><h3>Wurzelentfernung</h3><p>Stubbenfräsen und Freiräumen der Fläche.</p></a>
       <a href="#gard-viu"><h3>Heckenschnitt</h3><p>Thuja, Buchsbaum, Liguster – geschnitten und in Form gebracht.</p></a>
+      <a href="#sturm"><h3>Sturmschaden</h3><p>Umgestürzte Bäume schnell und sicher entfernt.</p></a>
     </div>
   </div>
 </section>
@@ -356,6 +360,38 @@ footer{background:#101A14;color:#7E8E81;font-size:.88rem;padding:22px 0;text-ali
         <span>Zum Vergrößern auf ein Foto tippen</span>
       </div>
       <div id="galerieGardViu"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STURMSCHADEN ============ -->
+<section class="serviciu" id="sturm">
+  <div class="wrap">
+    <div class="serviciu-cap">
+      <div>
+        <h2>Sturmschaden – umgestürzten Baum beseitigt</h2>
+        <p class="intro">Nach Sturm oder starkem Wind liegt oft ein Baum quer über Garten, Zaun oder Einfahrt. Wir kommen kurzfristig vorbei, zersägen den Stamm in transportable Stücke und räumen das gesamte Astwerk ab – sicher, auch in engen Gärten und direkt neben Zäunen oder Gebäuden.</p>
+        <p class="nota">Als Betrieb aus der Region Osnabrück sind wir schnell vor Ort. Auf Wunsch dokumentieren wir den Schaden mit Fotos, die Sie für Ihre Versicherung nutzen können.</p>
+      </div>
+      <div class="include">
+        <h3>Was zur Leistung gehört</h3>
+        <ul>
+          <li>Kurzfristige Terminvergabe bei akutem Sturmschaden</li>
+          <li>Sicheres Zersägen des Stamms in transportfähige Stücke</li>
+          <li>Entfernen und Entsorgen von Ästen und Kleinholz</li>
+          <li>Freilegen von Zaun, Gehweg oder Terrasse</li>
+          <li>Fotodokumentation auf Wunsch, z. B. für die Versicherung</li>
+          <li>Endreinigung der Fläche</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="galerie">
+      <div class="galerie-titlu">
+        <h3>Ausgeführte Arbeiten</h3>
+        <span>Zum Vergrößern auf ein Foto tippen</span>
+      </div>
+      <div id="galerieSturm"></div>
     </div>
   </div>
 </section>
@@ -696,10 +732,24 @@ var lucrariGard = [
   ]}
 ];
 
+var lucrariSturm = [
+  { an: 2022, titlu: 'Sturmschaden – umgestürzten Baum beseitigt', data: '18.07.–01.08.2022', poze: [
+    {f:'furtuna-01', a:'Vom Sturm abgebrochener Stamm, mit aufgerissener Rinde an der Bruchstelle'},
+    {f:'furtuna-02', a:'Aus dem Boden gerissener Wurzelballen, noch mit Erde behaftet'},
+    {f:'furtuna-03', a:'Umgestürzter Stamm, teilweise zersägt, mit abgetrennten und gestapelten Ästen'},
+    {f:'furtuna-04', a:'Mit Astwerk beladener Anhänger, mit einem Sicherungsnetz abgedeckt'},
+    {f:'furtuna-05', a:'Stamm über die ganze Länge zersägt, Äste nacheinander entfernt'},
+    {f:'furtuna-06', a:'Von Astwerk geräumter Bereich, abgesägter Stamm neben dem Zaun'},
+    {f:'furtuna-07', a:'Von einem Ende zum anderen zersägter Stamm, mit Astwerkhaufen daneben'},
+    {f:'furtuna-08', a:'Letztes Stück des Stammes am Boden, nach der Entsorgung des Astwerks'}
+  ]}
+];
+
 /* ---- inițializare galerii ---- */
 initGalerie('radacini', 'galerieRadacini', 'radacini', lucrariRadacini);
 initGalerie('gardviu', 'galerieGardViu', 'gardviu', lucrariGardViu);
 initGalerie('gard', 'galerieGard', 'gard', lucrariGard);
+initGalerie('sturm', 'galerieSturm', 'furtuna', lucrariSturm);
 
 /* ---- lightbox generic, funcționează pentru orice galerie înregistrată ---- */
 var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
